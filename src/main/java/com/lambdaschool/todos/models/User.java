@@ -48,6 +48,11 @@ public class User extends Auditable
 
 
 
+    @OneToMany(mappedBy = "users",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    @JsonIgnoreProperties(value = "todos", allowSetters = true)
+    private List<Todos> todos = new ArrayList<>();
     /**
      * Default constructor used primarily by the JPA.
      */
@@ -167,6 +172,9 @@ public class User extends Auditable
     }
 
 
+    public List<Todos> getTodos() { return todos; }
+
+    public void setTodos(List<Todos> todos) { this.todos = todos; }
 
 
 }

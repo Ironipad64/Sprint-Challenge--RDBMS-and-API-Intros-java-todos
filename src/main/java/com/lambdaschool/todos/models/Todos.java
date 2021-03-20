@@ -25,11 +25,7 @@ public class Todos extends Auditable {
     @Column(nullable = false)
     private long userid;
 
-    @OneToMany(mappedBy = "todos",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
-    @JsonIgnoreProperties(value = "todos", allowSetters = true)
-    private List<Todos> todos = new ArrayList<>();
+
 
     public Todo()
     {
@@ -82,7 +78,5 @@ public class Todos extends Auditable {
     }
 
 
-    public List<Todos> getTodos() { return todos; }
 
-    public void setTodos(List<Todos> todos) { this.todos = todos; }
 }
