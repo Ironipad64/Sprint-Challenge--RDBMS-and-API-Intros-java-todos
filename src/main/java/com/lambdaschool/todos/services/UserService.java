@@ -25,12 +25,7 @@ public interface UserService
      */
     User findUserById(long id);
 
-    /**
-     * Deletes the user record, its role and user combinations, and its todos items from the database based off of the provided primary key
-     *
-     * @param id id The primary key (long) of the user you seek.
-     */
-    void delete(long id);
+
 
     /**
      * Given a complete user object, saves that user object in the database.
@@ -48,4 +43,25 @@ public interface UserService
      * @return List of UserNameCountTodos
      */
     List<UserNameCountTodos> getCountUserTodos();
+
+    //POST -> Create a new resource
+    //    "/restaurant
+    //PUT -> replacing an entire resource
+    //    "/restaurant/{restid}"
+    //PATCH -> updating some fields of a resource
+    //    "/restaurant/{restid}"
+    User update(long id, User user);
+
+    //DELETE -> delete a resource
+    //    "/restaurant/{restid}"
+
+
+    /**
+     * Deletes the user record, its role and user combinations, and its todos items from the database based off of the provided primary key
+     *
+     * @param id id The primary key (long) of the user you seek.
+     */
+    void delete(long id);
+
+    void deleteAll();
 }

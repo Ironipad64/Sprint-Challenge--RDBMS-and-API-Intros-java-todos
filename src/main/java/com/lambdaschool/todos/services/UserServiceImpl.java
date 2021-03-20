@@ -79,4 +79,73 @@ public class UserServiceImpl implements UserService
     {
         return null;
     }
+
+
+
+    @Transactional
+    @Override
+    public User save(User user)
+    {
+        User newUser = new User();
+
+        //POST -> new resource
+        //PUT -> replace existing resource
+
+        if (User.getUserid() !=0){
+            userrepos.findById(user.getUserid())
+                    .orElseThrow(() -> new EntityNotFoundException("User " + user.getUserid() + " not found!"));
+            newUser.setUserid(user.getUserid());
+        }
+
+        newUser.setUsername(user.getUsername());
+        newUser.setPassword(user.getPassword());
+        newUser.setPrimaryemail(user.getPrimaryemail());
+
+//        //OneToMany -> new resources that arent in the database yet
+//
+//        newUser.get
+
+        @Transactional
+        @Override
+        public User update(long id, User user)
+        {
+            User updateUser = userrepos.findById(id)
+                    .orElseThrow(() -> new EntityNotFoundException("User " + id + " not found!"));
+
+                if (user.getUsername() != null) {
+                    updateUser.setUsername(user.getUsername());
+                }
+
+                if (user.getPassword() != null) {
+                    updateUser.setPassword(user.getPassword());
+                }
+
+                if (user.getPrimaryemail() != null) {
+                    updateUser.setPrimaryemail(user.getPrimaryemail());
+                }
+
+                return userrepos.save(updateUser);
+        }
+
+        @Override
+        public void delete(long id) {
+        userrepos.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Restaurant " + id + " not found!"));
+        userrepos.deleteById(id);
+        }
+
+        @Override
+        public void deleteAll() { userrepos.deleteAll(); }
+    }
+
+
+
 }
+
+
+
+
+
+
+
+
